@@ -17,7 +17,6 @@ router.post('/doctor/register', async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newDoctor = new Doctor({ name, email, password: hashedPassword });
-    
     await newDoctor.save();
     res.status(201).json({ message: 'doctor registered successfully' });
   
@@ -39,6 +38,24 @@ router.post('/doctor/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
     const token = jwt.sign({ id: doctor._id }, secretKey, { expiresIn: '1h' }); // Use secretKey here
+    res.status(200).json({ token });
+  } catch (error) {
+    console.error(error); // Log the error for debugging
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+router.post('/patient/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const patient = await Patient.findOne({ email });
+    if (!patient) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+    const isMatch = await bcrypt.compare(password, patient.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+    const token = jwt.sign({ id: patient._id }, secretKey, { expiresIn: '1h' }); // Use secretKey here
     res.status(200).json({ token });
   } catch (error) {
     console.error(error); // Log the error for debugging

@@ -3,8 +3,6 @@
 // import userService from '../services/user.service.js';
 
 // const registerUser = async (req, res, next) => {
-//     console.log('controller');
-//     console.log(req.body);
 //     try {
 //         const user = await userService.registerUser(req.body);
 //         res.status(201).json(user);
@@ -14,8 +12,6 @@
 // };
 
 // const loginUser = async (req, res, next) => {
-//     console.log('controller');
-//     console.log(req.body);
 //     try {
 //         const user = await userService.loginUser(req.body);
 //         const token = generateToken(user);

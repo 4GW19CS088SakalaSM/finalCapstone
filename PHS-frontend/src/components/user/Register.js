@@ -12,8 +12,6 @@ const Register = () => {
     const dispatch = useDispatch();
 
     const handleChange = (evt) => {
-        console.log(evt.target.name);
-        console.log(evt.target.value);
         setRegisterData({
             ...registerData,
             [evt.target.name]: evt.target.value
@@ -22,10 +20,8 @@ const Register = () => {
 
     const handleRegisterSubmit = async (evt) => {
         evt.preventDefault();
-        console.log(registerData);
         UserService.registerUser(registerData)
             .then((response) => {
-                console.log(response);
                 dispatch(userRegister(response));
                 setRegisterData({name: '',email:'', password: '' });
                 setAfterRegisterMessage(`Hi ${response.name}! You've registered successfully!`);
