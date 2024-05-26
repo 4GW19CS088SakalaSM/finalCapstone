@@ -12,6 +12,7 @@ import Appointment from "./Appointment";
 import MedicalRecords from "./MedicalRecords";
 import AdminDashboard from "./admin/AdminDashboard";
 import DoctorDashboard from "./doctor/DoctorDashboard";
+import AddNewDoctor from "./doctor/AddDoctor";
 
 const AppRoutes = () => {
     const loginStatus = useSelector(store => store.user.loginStatus);
@@ -37,6 +38,7 @@ const AppRoutes = () => {
                         <Route path="med-records" element={<MedicalRecords />} />
                         <Route path="adminDashboard" element={<AdminDashboard />} />
                         <Route path="doctorDashboard" element={<DoctorDashboard />} />
+                        <Route path="add-doctor" element = {<AddNewDoctor/> } />
                     </>
                 ) : (
                     <Route path="*" element={<Navigate to="/login" />} />
